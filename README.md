@@ -1,4 +1,8 @@
-# Recipe-Healthyness-Trends-by-season
-For UCSD class DSC80 project 3
+<!-- # Recipe-Healthyness-Trends-by-season
+For UCSD class DSC80 project 3 -->
 
-Testing if this works!!
+# Introduction
+
+# Cleaning and EDA
+# Assessment of Missingness
+# Hypothesis Testing
