@@ -1,4 +1,4 @@
-<img src="assets/american-heritage-chocolate-unsplash.png" alt="examplenorating" height=576 width=384 style="display: block; margin: 0 auto">
+<img src="assets/american-heritage-chocolate-unsplash.png" alt="examplenorating" height=576 style="display: block; margin: 0 auto">
 <!-- # Recipe-Healthyness-Trends-by-season
 For UCSD class DSC80 project 3 -->
 
@@ -14,7 +14,7 @@ For this we are going to be analyzing the columns `'id'`, `'date'` and `'nutriti
 
 Other columns we might work with during the cleaning process are `'minutes'`,`'submitted'`,`'n_steps'`,`'n_ingredients'`. We will probably use these since they contain relevant information about the recipe that if it's extreme, it could raise some red flags about our data.
 
-### Data Sets:
+### Datasets:
 
 _Recipes_
 <!-- start table -->
@@ -60,6 +60,17 @@ Finally we added a column that classified our recipes as `'balanced'` or `'unbal
 Source: https://www.fda.gov/food/new-nutrition-facts-label/lows-and-highs-percent-daily-value-new-nutrition-facts-label
 
 In summary, we explored the data generating process of this dataset from bottom to top, and used this information to decide which values were coherent with it and relevant to our analysis. We filtered out all values that weren't relevant, and classified those who were in order to perform analysis in the future.
+
+### Dataset
+
+Here is the final resulting cleaned dataframe[^1]:
+
+
+<iframe src="assets/datahead.html" width=1000 height=600 frameBorder=0></iframe>
+
+[^1]: We only show a preview of some columns for the sake of space and formatting when they are not essential to our understanding of the dataset or the analysis. 
+<!-- <iframe src="assets/df2.html" width=1000 height=600 frameBorder=0></iframe> -->
+
 
 #### Univariate Analysis
 
@@ -216,16 +227,6 @@ Another aggregate we did was the mean of all columns for ratings of recipes. We 
 It's interesting to see that that there is an inverse relationship between `'rating'` and `'minutes'`. Same happens with `'rating'` and `'n_steps'`. The rest of the columns doesn't seem to have much trends at all.
 
 
-Here is the final resulting cleaned dataframe:
-
-
-<iframe src="assets/datahead.html" width=1000 height=600 frameBorder=0></iframe>
-
-<!-- <iframe src="assets/df2.html" width=1000 height=600 frameBorder=0></iframe> -->
-
-
-
-
 # Assessment of Missingness
 
 **Percent Data Missing**
@@ -373,7 +374,7 @@ Once again, the graph gives an idea of how usual or abnormal our observed differ
 
 _Results_ <br>
 z-score:  387.5 <br>
-p-value:  8.9e-08[1] <br>
+p-value:  8.9e-08[^1] <br>
 Reject Null:  True <br>
 <br>
 
@@ -382,7 +383,7 @@ Reject Null:  True <br>
 We can interpret the results of the Kolmogorov-Smirnov permutation test as follows. Under the assumption that `'ratings'` is unrelated to the distribution of `'calories'`, the chance of seeing distributions as, or more, different than our two observed `'calories'` distributions rounds to 0%.
 
 This is below our alpha threshold of 5% so we **reject the null**. This means that the missingness of `'ratings'` is likely related and or condional to the distribution of `'calories'`. This means `'ratings'` is MAR upon `'calories'`.
-[1]This is scientific notation for 9 × 10^-8 which is very close to 0
+[^1]: This is scientific notation for 9 × 10^-8 which is very close to 0
 <br>
 <br>
 
@@ -482,13 +483,13 @@ This was not the result we expected, however it does make us wonder if any one s
 
 # Conclusion
 
-We really enjoyed this project. We would like to encourage other students (everyone is a student) to check out online resources and try to do a project like this on your own with the same or another dataset! Real life data is messy, cleaning was paramount, little changes to outlier removal dramatically changed p-value results in our hypothesis test. It is always good to document your process for replicability and so you ensure your steps are logical. Lastly doing it with a friend makes it extra fun!
+We really enjoyed this project. We would like to encourage other students (everyone is a student) to check out online resources and try to do a project like this on your own with the same or another dataset! Real life data is messy, cleaning was paramount, little changes to outlier removal dramatically changed p-value results in our hypothesis test. It is always good to document your process for replicability and so you ensure your steps are logical. ==Lastly doing it with a friend makes it extra fun!==
 
 Sincerely, 
 Eduardo and Trey
 
-PS
-Check out our other work at our github profiles linked below or send us a message [trey11sport@gmail.com](mailto:trey11sport@gmail.com) [eduardo.spiegel21@gmail.com](mailto:eduardo.spiegel21@gmail.com)
+P.S.
+Check out our other work at our github profiles linked below or send us a message at [trey11sport@gmail.com](mailto:trey11sport@gmail.com) & [eduardo.spiegel21@gmail.com](mailto:eduardo.spiegel21@gmail.com)
 
 
 **Other Possible Questions:**
