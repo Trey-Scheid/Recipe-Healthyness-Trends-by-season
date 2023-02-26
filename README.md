@@ -1,5 +1,9 @@
 <!-- # Recipe-Healthyness-Trends-by-season
 For UCSD class DSC80 project 3 -->
+<img src="assets/american-heritage-chocolate-unsplash.png" alt="examplenorating" height=700 style="display: block; margin: 0 auto">
+
+
+
 
 # Introduction
 
