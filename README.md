@@ -101,7 +101,7 @@ One interesting aggregate we thought of was the mean of all columns for balanced
 <table border="0" class="dataframe" style="width:90%"><thead><tr style="text-align: right;"><th></th><th>minutes</th><th>n_steps</th><th>n_ingredients</th><th>avg_rating</th><th>calories</th><th>total_fat</th><th>sugar</th><th>sodium</th><th>protein</th><th>saturated_fat</th><th>carbohydrates</th></tr>    <tr><th>balanced</th><th></th><th></th><th></th>      <th></th><th></th><th></th><th></th><th></th><th></th><th></th>      <th></th>    </tr>  </thead>  <tbody>    <tr><th>False</th><td>37.288474</td><td>9.720619</td>      <td>9.037901</td><td>4.630582</td><td>322.656586</td><td>0.237330</td><td>0.469933</td>      <td>0.229876</td><td>0.268985</td><td>0.295157</td><td>0.101728</td></tr>    <tr>      <th>True</th><td>39.719638</td><td>10.237726</td><td>9.284238</td><td>4.611692</td>      <td>200.788889</td><td>0.111835</td><td>0.117106</td><td>0.119289</td><td>0.117946</td>      <td>0.108475</td><td>0.088152</td></tr>  </tbody></table>
 
 
-We can compare the values of all the columns. First, we can see that the `'avg_rating'` for each one is quite similar which sounds fair. Then, the `'calories'` column do shows a signifficant difference between them. The `'unbalanced'` recipes have a mean of `322.65` while the balanced recipes have a mean of `200.78`. Finally the rest of the columns, unbalanced recipes is much greater to all of balanced recipes, with the `'carbohydrates'` column being the closest one to the blanced recipes mean.
+We can compare the values of all the columns. First, we can see that the `'avg_rating'` for each one is quite similar which sounds fair. Then, the `'calories'` column do shows a signifficant difference between them. The `'unbalanced'` recipes have a mean of `322.66` while the balanced recipes have a mean of `200.79`. Finally the rest of the columns, unbalanced recipes is much greater to all of balanced recipes, with the `'carbohydrates'` column being the closest one to the blanced recipes mean.
 
 Another aggregate we did was the mean of all columns for ratings of recipes. We groupby ratings in our data DataFrame and aggregate all columns using the mean.
 
@@ -235,7 +235,6 @@ Here is the final resulting cleaned dataframe:
 | rating      | 5.94474   |
 | avg_rating  | 1.06822   |
 
-dtype: float64
 
 This summary shows us that of the relevant columns we are still working with, there are 3 columns with missing data. 2 are from the original dataset but we added `'avg_rating'`. We will look deeper into `'rating'` and `'description'`. But we should notice that none of them have relatively many datapoints missing.
 
@@ -290,12 +289,12 @@ As we can see the distributions are centered at roughly the same location but th
 <br>
 
 _Results_ <br>
-z-score:  3.3333333333333335 <br>
-p-value:  0.9380583291749669 <br>
+z-score:  3.33 <br>
+p-value:  0.938 <br>
 Reject Null:  False <br>
 <br>
 
-##### Interpret Results
+##### Results
 
 We can interpret the results of the Kolmogorov-Smirnov permutation test as follows. Under the assumption that `'description'` is unrelated to the distribution of `'avg_rating'`, the chance of seeing distributions as, or more, different than our two observed `'avg_rating'` distributions is 93.8%.
 
@@ -319,7 +318,7 @@ The last test statistic was calculated using a python library and immediately ga
 
 <iframe src="assets/visualization_13.html" width=700 height=500 frameBorder=0></iframe>
 
-The graph gives an idea of how usual or abnormal our observed TVD is compared to permutations under the null. It shows a histogram of all the TVDs when `'user_id'` doesn't influence `'description'` missingness. We get an exact measure of how many TVDs are as or more extreme when we calculate the p-value.
+The graph gives an idea of how usual or abnormal our observed TVD is compared to permutations under the null. It shows a histogram of all the TVDs when `'user_id'` doesn't influence `'description'` missingness. We get an exact measure of how many TVDs are as or more extreme when we calculate the p-value. The p-value turned out to be 0.359.
 
 ##### Results
 
@@ -341,7 +340,7 @@ We see that the means are closely aligned, The shapes are also pretty similar bu
 
 _Results_ <br>
 z-score:  202.3 <br>
-p-value:  0.5062467217248188 <br>
+p-value:  0.506 <br>
 Reject Null:  False <br>
 
 That did not result in significant results, we **fail to reject the null**. Before we interpret and conclude, lets test the difference in means as well. 
@@ -350,11 +349,11 @@ That did not result in significant results, we **fail to reject the null**. Befo
 
 <iframe src="assets/visualization_15.html" width=700 height=500 frameBorder=0></iframe>
 
-Once again, the graph gives an idea of how usual or abnormal our observed difference of means is compared to permutations under the null, we get an exact measure of how many differences are as or more extreme when we calculate the p-value:
+Once again, the graph gives an idea of how usual or abnormal our observed difference of means is compared to permutations under the null, we get an exact measure of how many differences are as or more extreme when we calculate the p-value: 0.169.
 
 ##### Results
 
-We can interpret the results of both permutation tests. Under the null assumptions where missingness of `'description'` is unrelated to the distribution of `'calories'`, the chance of seeing a mean difference or Kolmogorov-Smirnov, or more, different than observed is 17.2% and 50.6% respectively.
+We can interpret the results of both permutation tests. Under the null assumptions where missingness of `'description'` is unrelated to the distribution of `'calories'`, the chance of seeing a mean difference or Kolmogorov-Smirnov, or more, different than observed is 16.9% and 50.6% respectively.
 
 These are above our alpha threshold of 5% so we **fail to reject the null** twice. This means that the missingness of `'description'` is not likely to be related and or condional on `'calories'`. Once again we cannot say `'description'` is MAR upon `'calories'`.
 
@@ -374,15 +373,16 @@ Once again, the graph gives an idea of how usual or abnormal our observed differ
 
 _Results_ <br>
 z-score:  387.5 <br>
-p-value:  8.96823731655477e-08 <br>
+p-value:  8.9e-08[1] <br>
 Reject Null:  True <br>
+<br>
 
 ##### Results
 
 We can interpret the results of the Kolmogorov-Smirnov permutation test as follows. Under the assumption that `'ratings'` is unrelated to the distribution of `'calories'`, the chance of seeing distributions as, or more, different than our two observed `'calories'` distributions rounds to 0%.
 
 This is below our alpha threshold of 5% so we **reject the null**. This means that the missingness of `'ratings'` is likely related and or condional to the distribution of `'calories'`. This means `'ratings'` is MAR upon `'calories'`.
-
+[1]This is scientific notation for 9 × 10^-8 which is very close to 0
 <br>
 <br>
 
@@ -396,7 +396,7 @@ This is below our alpha threshold of 5% so we **reject the null**. This means th
 
 _Results_ <br>
 z-score:  0.37 <br>
-p-value:  2.7111280133990385e-06 <br>
+p-value:  2.7e-06 <br>
 Reject Null:  True <br>
 
 
@@ -418,7 +418,7 @@ For a third time we **reject the null** and this time with a p-value 0.00! Missi
 <br>
 <br>
 
-## Missingness Notes
+### Missingness Notes
 
 While assessing missingness for the recipes and interactions data we found that missing descriptions are not missing at random by `'avg_rating'`, `'user_id'`, or `'calories'`. We did not find any columns that it was MAR for. For the `'rating'` column we found the opposite, it was missing at random on `'calories'`, `'total_fat'`, and `'name'`. We are not using either column for our hypothesis test so no imputation or drops are necessary.
 
@@ -427,6 +427,7 @@ While assessing missingness for the recipes and interactions data we found that 
 <br>
 
 # Hypothesis Testing
+<br>
 
 Guiding Question: **Do people eat more unhealthy food during the winter holiday season?**
 
@@ -437,7 +438,9 @@ Interpretation according to available data: Do people interact more with unbalan
 
 * Test Statistic: _proportion of recipes that are **not** balanced_
 
-* alpha level: 0.01 significance level
+* alpha level: 0.01 significance level'
+
+This proportion will be able to show us how popular balanced food is in comparison to unbalanced foor in any given month without being affected by individual recipes (such as high calories) or varying amounts of interactions in each month (proportions are relative). The 1% significance level will help us be more confident in the answer to our question should we reject, we are limiting the probalility of a type I error which is incorrectly rejecting the null. 
 <br>
 <br>
 
@@ -456,21 +459,26 @@ We notive that there is a dip followed by a spike in the last three years, this 
 
 _Now we perform the hypothesis test:_
 
-Just like with the permutation tests for missingness earlier, we have a distribution of test statistics, in this case proportions of unbalanced recipes. We can compare the proportion of unbalanced recipes from only the Holiday months which we are interested in compared to the general 
+Just like with the permutation tests for missingness earlier, we have a distribution of test statistics, in this case proportions of unbalanced recipes. We can compare the proportion of unbalanced recipes from only the Holiday months which we are interested in compared to the general. 
+
+We use simulation to create an empirical distribution of proportions of interactions on unbalanced recipes under the null hypothesis. This means random sampling with replacement from all the rows (including all the months) and calculating the proportion of interactions on unbalanced recipes for each repetition.
+
+Our observed test statistic is found by calculating the proportion of interactions on unbalanced recipes from the months October, November and December only yields 0.988. Here is a plot of the comparison:
 
 <iframe src="assets/visualization_21.html" width=700 height=500 frameBorder=0></iframe>
 
+The empirical distribution of proportions of interactions on unbalanced recipes shows all the probable proportions expected assuming the winter holiday season has no effect. We calculate a p-value of 0.6197 given our observed proportion.
+
 ##### Results
 
-Under the assumption that `'balanced'` or healthiness of a recipe is unrelated to the `'month'`, the chance of seeing a proportion of unbalanced recipes __in any three month period__ as or more extreme than the observed proportion of unbalanced recipes in the holiday season is 42.2%.
+Under the assumption that `'balanced'` or healthiness of a recipe is unrelated to the `'month'`, the chance of seeing a proportion of unbalanced recipes __in any three month period__ as or more extreme than the observed proportion of unbalanced recipes in the holiday season is 62.0%.
 
-This is above our alpha threshold of 1% so we **fail to reject the null**. Our observed proportion was not unlikely under the null, which means our observation is consistent with the hypothesis that being the winter holiday season does not relate to unbalanced recipe interactions. This also means that our intuition was not supported and we cannot say based on the data that people eat more unhealthy food during the winter holiday season. 
+This is above our selected significance level so we **fail to reject the null**. Our observed proportion was not unlikely under the null, which means our observation is consistent with the hypothesis that being the winter holiday season does not relate to unbalanced recipe interactions. This also means that our intuition was not supported and we cannot say based on the data that people eat more unhealthy food during the winter holiday season. 
 
 This was not the result we expected, however it does make us wonder if any one specific month or week would be significant. That any many more questions will have to be explored another time. 
 
-
-
-
+<br>
+<br>
 
 # Conclusion
 
