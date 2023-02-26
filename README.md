@@ -374,7 +374,7 @@ Once again, the graph gives an idea of how usual or abnormal our observed differ
 
 _Results_ <br>
 z-score:  387.5 <br>
-p-value:  8.9e-08[^1] <br>
+p-value:  8.9e-08[^2] <br>
 Reject Null:  True <br>
 <br>
 
@@ -383,7 +383,7 @@ Reject Null:  True <br>
 We can interpret the results of the Kolmogorov-Smirnov permutation test as follows. Under the assumption that `'ratings'` is unrelated to the distribution of `'calories'`, the chance of seeing distributions as, or more, different than our two observed `'calories'` distributions rounds to 0%.
 
 This is below our alpha threshold of 5% so we **reject the null**. This means that the missingness of `'ratings'` is likely related and or condional to the distribution of `'calories'`. This means `'ratings'` is MAR upon `'calories'`.
-[^1]: This is scientific notation for 9 × 10^-8 which is very close to 0
+[^2]: This is scientific notation for 9 × 10^-8 which is very close to 0
 <br>
 <br>
 
@@ -502,5 +502,9 @@ Check out our other work at our github profiles linked below or send us a messag
 - Are recipes that do not require an oven less healthy?
 - Does the sentiment of a review correlate positively with the rating?
 - Which ingredients have become more popular since COVID
+
+<br>
+<br>
+
 
 
