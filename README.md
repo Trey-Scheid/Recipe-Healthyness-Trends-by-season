@@ -324,6 +324,52 @@ We will check `'calories'` first. Its a stretch but since we have a hunch about 
 
 
 
+Once again, the graph gives an idea of how usual or abnormal our observed difference of means is compared to permutations under the null, we get an exact measure of how many differences are as or more extreme when we calculate the p-value:
+
+
+z-score:  387.5
+p-value:  8.96823731655477e-08
+Reject Null:  True
+
+##### Interpret Results
+
+We can interpret the results of the Kolmogorov-Smirnov permutation test as follows. Under the assumption that `'ratings'` is unrelated to the distribution of `'calories'`, the chance of seeing distributions as, or more, different than our two observed `'calories'` distributions rounds to 0%.
+
+This is below our alpha threshold of 5% so we **reject the null**. This means that the missingness of `'ratings'` is likely related and or condional to the distribution of `'calories'`.
+
+This means `'ratings'` is MAR upon `'calories'`.
+
+We will check another column against `'ratings'`.
+
+
+**total_fat**
+
+* Permutation Test for missingness of Rating on `'total_fat'`
+* Test Statistic: Kolmogorov-Smirnov
+* Alpha level: 5%
+
+
+z-score:  0.37
+p-value:  2.7111280133990385e-06
+Reject Null:  True
+
+
+We got another significant result for MAR on `'rating'`. Lets see one more column unrelated to the original `'nutrition'` column to see if it is also MAR.
+
+**name**
+
+* Permutation Test for missingness of Rating on `'name'`
+* Test Statistic: TVD
+* Alpha level: 5%
+
+The observed test statistic is the TVD calculated on the actual sample from the data without any shuffling.
+
+
+##### Interpret Results
+
+For a third time we **reject the null** for a missingness of `'rating'` conidioned on another column. Making `'rating'` dependent on many other columns. 
+
+While assessing missingness for the recipes and interactions data we found that missing descriptions are not missing at random by `'avg_rating'`, `'user_id'`, or `'calories'`. We did not find any columns that it was MAR for. For the `'rating'` column we found the opposite, it was missing at random on `'calories'`, `'total_fat'`, and `'name'`. We are not using either column for our hypothesis test so no imputation or drops are necessary.
 
 
 
@@ -334,6 +380,44 @@ We will check `'calories'` first. Its a stretch but since we have a hunch about 
 
 
 # Hypothesis Testing
+
+Guiding Question: **Do people eat more unhealthy food during the winter holiday season?**
+
+Interpretation according to available data: Do people interact more with unbalanced recipes from October to December than the rest of the year? Remember unbalanced recipes are our equivalent of unhealthy.
+
+
+* Variables: `'month'` and `'balanced'`
+
+* Test Statistic: _proportion of recipes that are **not** balanced_
+
+* alpha level: 0.01 significance level
+
+**Hypotheses**
+
+* _Null Hypothesis:_ proportion of unbalanced recipes from October to December is **equal to** the proportion of all unbalanced recipes
+* _Alternative Hypothesis:_ proportion of unbalanced recipes from October to December is **greater than** the proportion of all unbalanced recipes
+
+Lets check how the proportion of unbalanced recipes varies by year in case we should split up our hypothesis test. 
+
+
+We notive that there is a dip followed by a spike in the last three years, this data could be more variable since as we saw in the EDA there are much fewer recipes interacted with in the last few years. For this reason we will continue with the hypothesis test on all of the data together regardless of year. 
+
+_Now we perform the hypothesis test:_
+
+Just like with the permutation tests for missingness earlier, we have a distribution of test statistics, in this case proportions of unbalanced recipes. We can compare the proportion of unbalanced recipes from only the Holiday months which we are interested in compared to the general 
+
+
+##### Interpret Results
+
+Under the assumption that `'balanced'` or healthiness of a recipe is unrelated to the `'month'`, the chance of seeing a proportion of unbalanced recipes __in any three month period__ as or more extreme than the observed proportion of unbalanced recipes in the holiday season is 42.2%.
+
+This is above our alpha threshold of 1% so we **fail to reject the null**. Our observed proportion was not unlikely under the null, which means our observation is consistent with the hypothesis that being the winter holiday season does not relate to unbalanced recipe interactions. This also means that our intuition was not supported and we cannot say based on the data that people eat more unhealthy food during the winter holiday season. 
+
+This was not the result we expected, however it does make us wonder if any one specific month or week would be significant. That any many more questions will have to be explored another time. 
+
+
+
+
 
 # Conclusion
 
