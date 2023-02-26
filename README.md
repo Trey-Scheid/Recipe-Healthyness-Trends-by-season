@@ -160,7 +160,7 @@ We can compare the values of all the columns. First, we can see that the avg_rat
 
 Another aggregate we could do is is the mean of all columns for ratings of recipes. We are going to groupby ratings in our data DataFrame and aggregate all columns using the mean.
 
-<table border="0" class="dataframe">
+<table border="0" class="dataframe center">
   <thead>
     <tr style="text-align: right;">
       <th></th>
