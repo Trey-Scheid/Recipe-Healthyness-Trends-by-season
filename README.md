@@ -1,6 +1,7 @@
 <img src="assets/american-heritage-chocolate-unsplash.png" alt="examplenorating" height=576 style="display: block; margin: 0 auto">
 <!-- # Recipe-Healthyness-Trends-by-season
 For UCSD class DSC80 project 3 -->
+<br>
 
 # Introduction
 
@@ -13,6 +14,7 @@ We asked this question because we feel people tend to eat more unbalanced during
 For this we are going to be analyzing the columns `'id'`, `'date'` and `'nutrition'`. The column `'date'` stores the dates in which an interaction was made with a recipe. We will use this date as the date a person ate one of the recipes. Then we will use the column `'nutrition'` to classify each recipe `'id'` as a balanced or unbalanced recipe.
 
 Other columns we might work with during the cleaning process are `'minutes'`,`'submitted'`,`'n_steps'`,`'n_ingredients'`. We will probably use these since they contain relevant information about the recipe that if it's extreme, it could raise some red flags about our data.
+<br>
 
 ### Datasets:
 
@@ -62,6 +64,7 @@ Finally we added a column that classified our recipes as `'balanced'` or `'unbal
 Source: https://www.fda.gov/food/new-nutrition-facts-label/lows-and-highs-percent-daily-value-new-nutrition-facts-label
 
 In summary, we explored the data generating process of this dataset from bottom to top, and used this information to decide which values were coherent with it and relevant to our analysis. We filtered out all values that weren't relevant, and classified those who were in order to perform analysis in the future.
+
 <br>
 
 ### Dataset
@@ -74,7 +77,6 @@ Here is the final resulting cleaned dataframe[^1]:
 [^1]: We only show a preview of some columns for the sake of space and formatting when they are not essential to our understanding of the dataset or the analysis. 
 <!-- <iframe src="assets/df2.html" width=1000 height=600 frameBorder=0></iframe> -->
 
-<br>
 <br>
 
 #### Univariate Analysis
