@@ -46,9 +46,9 @@ Interestingly, we found out that `'microwave chocolate mug brownie'` is the most
 
 There's a large max number of `'minutes'` and it seems strange since it's nearly impossible a recipe could take you **1 million** minutes to make. Lets visualize the `'minutes'` distribution and evaluate how to address this issue.
 
-<iframe src="assets/file-name.html" width=800 height=600 frameBorder=0></iframe>
+<iframe src="assets/visualization_1.html" width=800 height=600 frameBorder=0></iframe>
 
-<iframe src="assets/file-name.html" width=800 height=600 frameBorder=0></iframe>
+<iframe src="assets/visualization_2.html" width=800 height=600 frameBorder=0></iframe>
 
 We can visualize that most of the data is centered in a reasonable place, but there are a few data points spread out all over until **1 million** minutes. 
 
@@ -59,7 +59,7 @@ Since it's really ambiguous how to decide a cutoff to these values, we are going
 Exactly 24291 rows were cut off from the original dataframe.
 Remaining Rows:  210138
 
-<iframe src="assets/file-name.html" width=800 height=600 frameBorder=0></iframe>
+<iframe src="assets/visualization_3.html" width=800 height=600 frameBorder=0></iframe>
 
 
 Moving on, we want the column `'submitted'` and `'date'` to both be `DateTime` objects. We are going check if these are strings and if they are, make the necessary transformations.
@@ -82,16 +82,16 @@ As we can see, we have some values that are way out of reality for a single serv
 
 As we can observe, most of these recipes are either cookies, cakes, breads or turkeys, which all of them are recipes that you usually cook for more than one person. These data will cause trouble to our hypothesis testing, so we need to find a way to cut it off. First lets visualize the distribution of `'calories'`, so we can decide how we are going to perform the cutoff.
 
-<iframe src="assets/file-name.html" width=800 height=600 frameBorder=0></iframe>
+<iframe src="assets/visualization_4.html" width=800 height=600 frameBorder=0></iframe>
 
-<iframe src="assets/file-name.html" width=800 height=600 frameBorder=0></iframe>
+<iframe src="assets/visualization_5.html" width=800 height=600 frameBorder=0></iframe>
 
 In the histogram above, we can observe that most of our data is concentrated in one point, and there are a bunch of other spread through until `45,000 calories`. Lets apply the same technique we used for `'minutes'`.
 
 Exactly 11676 rows were cut off from the original dataframe.
 Remaining Rows:  198462
 
-<iframe src="assets/file-name.html" width=800 height=600 frameBorder=0></iframe>
+<iframe src="assets/visualization_6.html" width=800 height=600 frameBorder=0></iframe>
 
 Since we have cleaned most of our data, lets check if there are any other columns with extreme values.
 
@@ -119,9 +119,9 @@ Let's create a DataFrame with `unique id's`. This will be handy for the future w
 
 We want to explore what's the distribution of interactions among all recipies. We think this is an interesting analysis since we can start drawing lots of experiments from it.
 
-<iframe src="assets/file-name.html" width=800 height=600 frameBorder=0></iframe>
+<iframe src="assets/visualization_7.html" width=800 height=600 frameBorder=0></iframe>
 
-<iframe src="assets/file-name.html" width=800 height=600 frameBorder=0></iframe>
+<iframe src="assets/visualization_8.html" width=800 height=600 frameBorder=0></iframe>
 
 We have checked that our `'rating'` values are in order. With this we finish the cleaning procces of our DataFrame, here is the head of it.
 
