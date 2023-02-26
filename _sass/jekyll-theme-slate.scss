@@ -98,7 +98,7 @@ footer p {
 
 a {
   text-decoration: none;
-  color: #0F79D0;
+  color: #ff7d1a;
   text-shadow: none;
 
   transition: color 0.5s ease;
@@ -147,7 +147,8 @@ img {
 
 p img {
   display: inline;
-  margin: 0;
+  margin-left: auto; //was margin 0
+  margin-right: auto;
   padding: 0;
   vertical-align: middle;
   text-align: center;

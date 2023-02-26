@@ -287,6 +287,7 @@ Here is the final resulting cleaned dataframe:
 **Percent Data Missing**
 |             |         0 |
 |:------------|----------:|
+
 | description | 0.0524032 |
 | rating      | 5.94474   |
 | avg_rating  | 1.06822   |
@@ -319,6 +320,8 @@ Neither `'description'` nor `'rating'` is closely related to the guiding questio
 First we will explore missingness in `'description'`:
 
 We believe it is plausible that if a `'description'` is missing then it is likely the author did not put in much effort to their post and the recipe will not be as good. This line of thinking would mean the `'avg_rating'` on that recipe would probably be lower for those that are missing. That would make `'description'` MAR on `'avg_rating'`. We can test this hypothesis with a permutation test. 
+<br>
+<br>
 
 **Avg_rating**
 
@@ -361,24 +364,21 @@ User_id is a categorical variable which means that we should use the total varia
 * Test Statistic: TVD
 * Alpha level: 5%
 
-
-We will calculate many TVDs, one for each shuffle of `'user_id'`, this is done because under the null the missingness of `'description'` does not depend on `'user_id'` so the pairings are arbitrary. We will then compare our observed TVD to these. 
-
-The observed test statistic is the TVD calculated on the actual sample from the data without any shuffling.
+The last test statistic was calculated using a python library and immediately gave the results. Now we will run the permutation test with our own simulation. To do that we calculate many TVDs, one for each shuffle of `'user_id'`, this is done because under the null the missingness of `'description'` does not depend on `'user_id'` so the pairings are arbitrary. We will then compare our observed TVD to these. The observed test statistic is the TVD calculated on the actual sample from the data without any shuffling.
 
 <iframe src="assets/visualization_13.html" width=700 height=500 frameBorder=0></iframe>
 
-The graph gives an idea of how usual or abnormal our observed TVD is compared to permutations under the null. It shows a histogram of all the TVDs when `'user_id'` doesn't influence `'description'` missingness. We get an exact measure of how many TVDs are as or more extreme when we calculate the p-value next:
+The graph gives an idea of how usual or abnormal our observed TVD is compared to permutations under the null. It shows a histogram of all the TVDs when `'user_id'` doesn't influence `'description'` missingness. We get an exact measure of how many TVDs are as or more extreme when we calculate the p-value.
 
-##### Interpret Results
+##### Results
 
-We can interpret the results of the TVD permutation test as follows. Under the assumption that `'description'` is unrelated to the distribution of `'user_id'`, the chance of seeing distributions as, or more, different than our two observed `'user_id'` distributions is `f"{p_value}"`%.
+We can interpret the results of the TVD permutation test as follows. Under the assumption that `'description'` is unrelated to the distribution of `'user_id'`, the chance of seeing distributions as, or more, different than our two observed `'user_id'` distributions is 35.9%.
 
-This is above our alpha threshold of 5% so we **fail to reject the null**. This means that the missingness of `'description'` is not likely to be related and or condional on `'user_id'`.
-
-This would mean `'description'` is not MAR upon `'user_id'`.
+This is above our alpha threshold of 5% so we **fail to reject the null**. This means that the missingness of `'description'` is not likely to be related and or condional on `'user_id'`. Consequently we cannot say `'description'` is MAR upon `'user_id'`.
 
 Lets try another, there might be one or more that are dependent, if we find even one that is MAR we would consider the missingness in `'description'` to be MAR, if we _fail_ to reject the null for every column then we default to MCAR. Lets test `'calories'` against `'description'`.
+<br>
+<br>
 
 **Calories**
 
