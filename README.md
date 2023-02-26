@@ -66,7 +66,7 @@ In summary, we explored the data generating process of this dataset from bottom 
 Here is the final resulting cleaned dataframe[^1]:
 
 
-<iframe src="assets/datahead.html" width=1000 height=600 frameBorder=0></iframe>
+<iframe src="assets/sdatahead.html" width=1000 height=600 frameBorder=0></iframe>
 
 [^1]: We only show a preview of some columns for the sake of space and formatting when they are not essential to our understanding of the dataset or the analysis. 
 <!-- <iframe src="assets/df2.html" width=1000 height=600 frameBorder=0></iframe> -->
@@ -486,7 +486,7 @@ This was not the result we expected, however it does make us wonder if any one s
 
 # Conclusion
 
-We really enjoyed this project. We would like to encourage other students (everyone is a student) to check out online resources and try to do a project like this on your own with the same or another dataset! Real life data is messy, cleaning was paramount, little changes to outlier removal dramatically changed p-value results in our hypothesis test. It is always good to document your process for replicability and so you ensure your steps are logical. ==Lastly doing it with a friend makes it extra fun!==
+We really enjoyed this project. We would like to encourage other students (everyone is a student) to check out online resources and try to do a project like this on your own with the same or another dataset! Real life data is messy, cleaning was paramount, little changes to outlier removal dramatically changed p-value results in our hypothesis test. It is always good to document your process for replicability and so you ensure your steps are logical. Lastly, **doing it with a friend makes it extra fun!**
 
 Sincerely, 
 Eduardo and Trey
