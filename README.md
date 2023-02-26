@@ -251,7 +251,7 @@ It's interesting to see that that there is an inverse relationship between `'rat
 
 
 Here is the final resulting cleaned dataframe:
-
+<!-- 
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -415,9 +415,11 @@ Here is the final resulting cleaned dataframe:
   </tbody>
 </table>
 <p>5 rows × 24 columns</p>
+ -->
 
 <iframe src="assets/datahead.html" width=1000 height=600 frameBorder=0></iframe>
 
+<iframe src="assets/df2.html" width=1000 height=600 frameBorder=0></iframe>
 
 
 
@@ -425,6 +427,7 @@ Here is the final resulting cleaned dataframe:
 # Assessment of Missingness
 
 <!-- to markdown -->
+
 description    0.052403
 rating         5.944745
 review         0.022171
