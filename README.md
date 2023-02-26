@@ -289,6 +289,7 @@ Here is the final resulting cleaned dataframe:
 | description | 0.0524032 |
 | rating      | 5.94474   |
 | avg_rating  | 1.06822   |
+
 dtype: float64
 
 This summary shows us that of the relevant columns we are still working with, there are 3 columns with missing data. 2 are from the original dataset but we added `'avg_rating'`. We will look deeper into `'rating'` and `'description'`. But we should notice that none of them have relatively many datapoints missing.
@@ -296,6 +297,8 @@ This summary shows us that of the relevant columns we are still working with, th
 First we can quickly explain `'avg_rating'`
 
 Looking at the other Columns with missing data, we know avg_rating was calculated by aggregating the ratings for each recipe, so any missingness here is __Missing by Design__ based on missingness in the rating column. We can perfectly and exactly determine the missingness of `'avg_rating'` by checking if any interactions are missing a `'rating'` for each recipe (grouping by `'id'`). 
+<br>
+<br>
 
 #### NMAR Analysis
 
@@ -311,6 +314,8 @@ Here is an example of an interaction without a rating, it happens to be for some
 
 <img src="assets/NoRating.png" alt="examplenorating" height=500 style="display: block; margin: 0 auto">
 <!-- ![example of missing rating](assets/NoRating.png) -->
+<br>
+<br>
 
 #### Missingness Dependency
 
@@ -326,7 +331,7 @@ We believe it is plausible that if a `'description'` is missing then it is likel
 
 We perform a Permutation Test to see if missingness of description column is conditional on `'avg_rating'`. We will end up repeating this process for many columns following. Description is unique to a recipe but duplicated for each interaction, we want to know how it relates to the recipes so we must retrieve that data again by grouping the interviews for each recipe together. We need to work with only the non-null rows of the data in avg_rating otherwise no statistic could be computed.
 
-#### Choosing a Test Statistic
+###### Choosing a Test Statistic
 
 `'avg_rating'` is a quantitative variable which gives us two main options. We should use the difference of means for missing and not missing `'description'` if the distribution of `'avg_rating'` is roughly the same shape but shifted. If the shape is different and distributions are centered in the same place we should use the Kolmogorov-Smirnov statistic. 
 
@@ -337,11 +342,13 @@ As we can see the distributions are centered at roughly the same location but th
 * Permutation Test for MAR of Description on `'avg_rating'`
 * Test Statistic: Kolmogorov-Smirnov
 * Alpha level: 5%
+<br>
 
 _Results_ <br>
 z-score:  3.3333333333333335 <br>
 p-value:  0.9380583291749669 <br>
 Reject Null:  False <br>
+<br>
 
 ##### Interpret Results
 
@@ -406,11 +413,8 @@ We can interpret the results of both permutation tests. Under the null assumptio
 
 These are above our alpha threshold of 5% so we **fail to reject the null** twice. This means that the missingness of `'description'` is not likely to be related and or condional on `'calories'`. Once again we cannot say `'description'` is MAR upon `'calories'`.
 
-<br>
-
 We will skip checking each column individually but that is the process to check for MAR vs MCAR. 
 
-<br>
 <br>
 <br>
 Next we will explore missingness in `'ratings'`:
@@ -437,14 +441,13 @@ This is below our alpha threshold of 5% so we **reject the null**. This means th
 <br>
 <br>
 
-
 **total_fat**
+
+<iframe src="assets/visualization_18.html" width=700 height=500 frameBorder=0></iframe>
 
 * Permutation Test for missingness of Rating on `'total_fat'`
 * Test Statistic: Kolmogorov-Smirnov
 * Alpha level: 5%
-
-<iframe src="assets/visualization_18.html" width=700 height=500 frameBorder=0></iframe>
 
 _Results_ <br>
 z-score:  0.37 <br>
@@ -466,12 +469,14 @@ We got another significant result for MAR on `'rating'`. Lets see one more colum
 
 ##### Results
 
-For a third time we **reject the null** for a missingness of `'rating'` conidioned on another column. Making `'rating'` dependent on many other columns. 
+For a third time we **reject the null** and this time with a p-value 0.00! Missingness of `'rating'` is dependent on yet one more of many other columns. 
+<br>
+<br>
+
+## Missingness Notes
 
 While assessing missingness for the recipes and interactions data we found that missing descriptions are not missing at random by `'avg_rating'`, `'user_id'`, or `'calories'`. We did not find any columns that it was MAR for. For the `'rating'` column we found the opposite, it was missing at random on `'calories'`, `'total_fat'`, and `'name'`. We are not using either column for our hypothesis test so no imputation or drops are necessary.
 
-
-<br>
 <br>
 <br>
 <br>
