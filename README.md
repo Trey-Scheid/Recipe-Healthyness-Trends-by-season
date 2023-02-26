@@ -312,8 +312,10 @@ We do not believe that the missingness mechanism for either is not missing at ra
 
 Here is an example of an interaction without a rating, it happens to be for someone who tried the recipe and loved it. We can imagine this is also likely for someone who hasn't tried it or tried it and did not like it. 
 
-<!-- <img src="assets/NoRating.png" height=100> -->
-![example of missing rating](assets/NoRating.png){style="display: block; margin: 0 auto" }
+
+
+<img src="assets/NoRating.png" alt="examplenorating" height=500 style="display: block; margin: 0 auto">
+<!-- ![example of missing rating](assets/NoRating.png) -->
 
 #### Missingness Dependency
 
