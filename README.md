@@ -48,7 +48,7 @@ There's a large max number of `'minutes'` and it seems strange since it's nearly
 
 <iframe src="assets/visualization_1.html" width=700 height=500 frameBorder=0></iframe>
 
-<iframe src="assets/visualization_2.html" width=600 height=400 frameBorder=0></iframe>
+<iframe src="assets/visualization_2.html" width=700 height=500 frameBorder=0></iframe>
 
 We can visualize that most of the data is centered in a reasonable place, but there are a few data points spread out all over until **1 million** minutes. 
 
@@ -59,7 +59,7 @@ Since it's really ambiguous how to decide a cutoff to these values, we are going
 Exactly 24291 rows were cut off from the original dataframe.
 Remaining Rows:  210138
 
-<iframe src="assets/visualization_3.html" width=800 height=600 frameBorder=0></iframe>
+<iframe src="assets/visualization_3.html" width=700 height=500 frameBorder=0></iframe>
 
 
 Moving on, we want the column `'submitted'` and `'date'` to both be `DateTime` objects. We are going check if these are strings and if they are, make the necessary transformations.
@@ -82,16 +82,16 @@ As we can see, we have some values that are way out of reality for a single serv
 
 As we can observe, most of these recipes are either cookies, cakes, breads or turkeys, which all of them are recipes that you usually cook for more than one person. These data will cause trouble to our hypothesis testing, so we need to find a way to cut it off. First lets visualize the distribution of `'calories'`, so we can decide how we are going to perform the cutoff.
 
-<iframe src="assets/visualization_4.html" width=800 height=600 frameBorder=0></iframe>
+<iframe src="assets/visualization_4.html" width=700 height=500 frameBorder=0></iframe>
 
-<iframe src="assets/visualization_5.html" width=800 height=600 frameBorder=0></iframe>
+<iframe src="assets/visualization_5.html" width=700 height=500 frameBorder=0></iframe>
 
 In the histogram above, we can observe that most of our data is concentrated in one point, and there are a bunch of other spread through until `45,000 calories`. Lets apply the same technique we used for `'minutes'`.
 
 Exactly 11676 rows were cut off from the original dataframe.
 Remaining Rows:  198462
 
-<iframe src="assets/visualization_6.html" width=800 height=600 frameBorder=0></iframe>
+<iframe src="assets/visualization_6.html" width=700 height=500 frameBorder=0></iframe>
 
 Since we have cleaned most of our data, lets check if there are any other columns with extreme values.
 
@@ -119,9 +119,9 @@ Let's create a DataFrame with `unique id's`. This will be handy for the future w
 
 We want to explore what's the distribution of interactions among all recipies. We think this is an interesting analysis since we can start drawing lots of experiments from it.
 
-<iframe src="assets/visualization_7.html" width=800 height=600 frameBorder=0></iframe>
+<iframe src="assets/visualization_7.html" width=700 height=500 frameBorder=0></iframe>
 
-<iframe src="assets/visualization_8.html" width=800 height=600 frameBorder=0></iframe>
+<iframe src="assets/visualization_8.html" width=700 height=500 frameBorder=0></iframe>
 
 We have checked that our `'rating'` values are in order. With this we finish the cleaning procces of our DataFrame, here is the head of it.
 
@@ -135,19 +135,19 @@ This is a really insightfull visualization since we can observe how the amount o
 
 Sometimes the best food we eat is the one with the most calories. Although that's quite a shame, let's see if that's true in our data. For this we are going to compare the relationship between `'rating'` and `'calories'`. We are going to plot a horizontal bar chart to show the `mean of calories per star rating`.
 
-
+<iframe src="assets/visualization_9.html" width=700 height=500 frameBorder=0></iframe>
 
 This is quite surprising since it goes against our intuition. We thought food with more calories would have more ratings but apparently is completely opposite from what we thought. Even though almost all means are the same, we can see an inverse proportionate trend with respect to ratings. It will be interesting then to see how our question develops in the next steps.
 
 Now lets observe the relationship between mean of calories consumed per month of the year.
 
-
+<iframe src="assets/visualization_10.html" width=700 height=500 frameBorder=0></iframe>
 
 There appears to be a trens in the data. The months February, March, September and October have quite a peak compared to the rest of the months. It could be quite interesting to anlyze more in depth what are the reasons of this.
 
 Another bivariate analysis we can work on is the distribution of calories between `'balanced'` and `'unbalanced'` recipes. Lets plot a histogram with a marginal box plot to see the difference in distributions.
 
-
+<iframe src="assets/visualization_11.html" width=700 height=500 frameBorder=0></iframe>
 
 We can observe that there is a signifficant difference in the distributions of calories of balanced and unbalanced recipes. Most of the balanced recipes are centered around 200 while the unbalanced recipes are more skewed to the right.
 
@@ -335,7 +335,7 @@ need to work with only the non-null rows of the data in avg_rating otherwise no 
 
 plot distribution of Avg_rating based on missingness of description
 
-
+<iframe src="assets/visualization_12.html" width=700 height=500 frameBorder=0></iframe>
 
 As we can see the distributions are centered at roughly the same location but their shapes are pretty different. This means we will use the Kolmogorov-Smirnov test statistic and run a permutation test to see if `'description'` is MAR on `'avg_rating'`.
 
@@ -370,7 +370,7 @@ We will calculate many TVDs, one for each shuffle of `'user_id'`, this is done b
 
 The observed test statistic is the TVD calculated on the actual sample from the data without any shuffling.
 
-<!-- plot -->
+<iframe src="assets/visualization_13.html" width=700 height=500 frameBorder=0></iframe>
 
 The graph gives an idea of how usual or abnormal our observed TVD is compared to permutations under the null. It shows a histogram of all the TVDs when `'user_id'` doesn't influence `'description'` missingness. We get an exact measure of how many TVDs are as or more extreme when we calculate the p-value next:
 
@@ -388,6 +388,8 @@ Lets try another, there might be one or more that are dependent, if we find even
 
 Need to choose a test statistic, so need to see if the distribtutions of `'calories'` with and without `'description_missingness'` are shifted versions (diff of means) or same center and diff shape (Kolmogorov-Smirnov)
 
+<iframe src="assets/visualization_14.html" width=700 height=500 frameBorder=0></iframe>
+
 We see that the means are closely aligned, The shapes are also pretty similar but the height of the curve and the level it dips are different so we will try Kolmogorov-Smirnov statistic.
 
 z-score:  202.3
@@ -396,7 +398,7 @@ Reject Null:  False
 
 That did not result in significant results, we **fail to reject the null**. Before we interpret and conclude, lets test the difference in means as well. 
 
-
+<iframe src="assets/visualization_15.html" width=700 height=500 frameBorder=0></iframe>
 
 Once again, the graph gives an idea of how usual or abnormal our observed difference of means is compared to permutations under the null, we get an exact measure of how many differences are as or more extreme when we calculate the p-value:
 
@@ -420,7 +422,9 @@ This means we need the whole data dataframe since this involves each interaction
 
 We will check `'calories'` first. Its a stretch but since we have a hunch about unhealthy foods being more popular in the holiday season, maybe more calories relates to lower ratings and therefore missing ratings. \*Note even a rejected null could not prove this or any theory because it is not evidence of causation.
 
+<iframe src="assets/visualization_16.html" width=700 height=500 frameBorder=0></iframe>
 
+<iframe src="assets/visualization_17.html" width=700 height=500 frameBorder=0></iframe>
 
 Once again, the graph gives an idea of how usual or abnormal our observed difference of means is compared to permutations under the null, we get an exact measure of how many differences are as or more extreme when we calculate the p-value:
 
@@ -446,6 +450,7 @@ We will check another column against `'ratings'`.
 * Test Statistic: Kolmogorov-Smirnov
 * Alpha level: 5%
 
+<iframe src="assets/visualization_18.html" width=700 height=500 frameBorder=0></iframe>
 
 z-score:  0.37
 p-value:  2.7111280133990385e-06
@@ -462,6 +467,7 @@ We got another significant result for MAR on `'rating'`. Lets see one more colum
 
 The observed test statistic is the TVD calculated on the actual sample from the data without any shuffling.
 
+<iframe src="assets/visualization_19.html" width=700 height=500 frameBorder=0></iframe>
 
 ##### Interpret Results
 
@@ -497,6 +503,7 @@ Interpretation according to available data: Do people interact more with unbalan
 
 Lets check how the proportion of unbalanced recipes varies by year in case we should split up our hypothesis test. 
 
+<iframe src="assets/visualization_20.html" width=700 height=500 frameBorder=0></iframe>
 
 We notive that there is a dip followed by a spike in the last three years, this data could be more variable since as we saw in the EDA there are much fewer recipes interacted with in the last few years. For this reason we will continue with the hypothesis test on all of the data together regardless of year. 
 
@@ -504,6 +511,7 @@ _Now we perform the hypothesis test:_
 
 Just like with the permutation tests for missingness earlier, we have a distribution of test statistics, in this case proportions of unbalanced recipes. We can compare the proportion of unbalanced recipes from only the Holiday months which we are interested in compared to the general 
 
+<iframe src="assets/visualization_21.html" width=700 height=500 frameBorder=0></iframe>
 
 ##### Interpret Results
 
