@@ -24,6 +24,8 @@ _Recipes_
 _Ratings_
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Column</th><th style="text-align: left">Description</th></tr></thead><tbody><tr><td style="text-align: left"><code class="language-plaintext highlighter-rouge">'user_id'</code></td><td style="text-align: left">User ID</td></tr><tr><td style="text-align: left"><code class="language-plaintext highlighter-rouge">'recipe_id'</code></td><td style="text-align: left">Recipe ID</td></tr><tr><td style="text-align: left"><code class="language-plaintext highlighter-rouge">'date'</code></td><td style="text-align: left">Date of interaction</td></tr><tr><td style="text-align: left"><code class="language-plaintext highlighter-rouge">'rating'</code></td><td style="text-align: left">Rating given</td></tr><tr><td style="text-align: left"><code class="language-plaintext highlighter-rouge">'review'</code></td><td style="text-align: left">Review text</td></tr></tbody></table></div>
 
+<br>
+<br>
 
 
 # Cleaning and EDA
@@ -60,6 +62,7 @@ Finally we added a column that classified our recipes as `'balanced'` or `'unbal
 Source: https://www.fda.gov/food/new-nutrition-facts-label/lows-and-highs-percent-daily-value-new-nutrition-facts-label
 
 In summary, we explored the data generating process of this dataset from bottom to top, and used this information to decide which values were coherent with it and relevant to our analysis. We filtered out all values that weren't relevant, and classified those who were in order to perform analysis in the future.
+<br>
 
 ### Dataset
 
@@ -71,6 +74,8 @@ Here is the final resulting cleaned dataframe[^1]:
 [^1]: We only show a preview of some columns for the sake of space and formatting when they are not essential to our understanding of the dataset or the analysis. 
 <!-- <iframe src="assets/df2.html" width=1000 height=600 frameBorder=0></iframe> -->
 
+<br>
+<br>
 
 #### Univariate Analysis
 
@@ -83,6 +88,8 @@ As we observe, there is a decrease in interactions over the years according to t
 <iframe src="assets/visualization_8.html" width=700 height=500 frameBorder=0></iframe>
 
 This is a really insightfull visualization since we can observe how the amount of submissions decreased over the years from thousands of recipes submitted per month to less than 50 per month. 
+<br>
+<br>
 
 #### Bivariate Analysis
 
@@ -103,6 +110,8 @@ Another bivariate analysis we worked on is the distribution of calories between 
 <iframe src="assets/visualization_11.html" width=700 height=500 frameBorder=0></iframe>
 
 We can observe that there is a signifficant difference in the distributions of calories of balanced and unbalanced recipes. Most of the balanced recipes are centered around 200 while the unbalanced recipes are more skewed to the right.
+<br>
+<br>
 
 #### Interesting Aggregates
 
@@ -226,6 +235,9 @@ Another aggregate we did was the mean of all columns for ratings of recipes. We 
 
 It's interesting to see that that there is an inverse relationship between `'rating'` and `'minutes'`. Same happens with `'rating'` and `'n_steps'`. The rest of the columns doesn't seem to have much trends at all.
 
+<br>
+<br>
+<br>
 
 # Assessment of Missingness
 
