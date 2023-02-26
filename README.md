@@ -4,11 +4,11 @@ For UCSD class DSC80 project 3 -->
 # Introduction
 
 
-In this notebook we are going to be analyzing a dataset that contains recipes and ratings from <a href="https://www.food.com/">food.com</a>. The dataset consists of `234,429` interactions with one recipe. Our goal is to answer the following question: 
+In this notebook we are going to be analyzing a dataset that contains recipes and ratings from <a href="https://www.food.com/">food.com</a>. The dataset consists of `234,429` interactions with recipes. Our goal is to answer the following question: 
 
 **Do people eat more unbalanced food during the winter holiday season?**
 
-We asked this question because we feel people tend to eat more unbalanced during these months since there are lots of holidays and special occasions which include unbalanced food many times. Therefore, in orther to check if this is true, we are going to analyze the data from <a href="https://www.food.com/">food.com</a>.
+We asked this question because we feel people tend to eat more unbalanced during these months since there are lots of holidays and special occasions which include unbalanced food many times. Therefore, in order to check if this is true, we are going to analyze the data from <a href="https://www.food.com/">food.com</a>.
 
 For this we are going to be analyzing the columns `'id'`, `'date'` and `'nutrition'`. The column `'date'` stores the dates in which an interaction was made with a recipe. We will use this date as the date a person ate one of the recipes. Then we will use the column `'nutrition'` to classify each recipe `'id'` as a balanced or unbalanced recipe.
 
@@ -29,12 +29,11 @@ _Ratings_
 # Cleaning and EDA
 
 <!-- Describe, in detail, the data cleaning steps you took and how they affected your analyses. The steps should be explained in reference to the data generating process. Show the head of your cleaned DataFrame -->
+Steps:
 
-We are going to merge these two datasets on the `'recipe_id'` column.
-
-Fill 0's with np.nan
-
-Find the average rating per recipe, as a Series
+    1. Merge these two datasets on the `'recipe_id'` column
+    2. Fill 0's in `'rating'` with `'NaN'`, because food.com doesn't allow to rate a recipe with 0's
+    3. Create a columns of the average rating per recipe
 
 Let's check how messy is our data, so we will start exploring column by column how everything looks.
 
@@ -155,12 +154,13 @@ We can observe that there is a signifficant difference in the distributions of c
 
 One interesting aggregate is the mean of all columns for balanced and unbalanced recipes. For this we need to groupby recipe, but we already did that, so we are going to use our 'unique_id_df' to groupby the 'balanced' column.
 
+<table border="0" class="dataframe">\n  <thead>\n    <tr style="text-align: right;">\n      <th></th>\n      <th>minutes</th>\n      <th>n_steps</th>\n      <th>n_ingredients</th>\n      <th>avg_rating</th>\n      <th>calories</th>\n      <th>total_fat</th>\n      <th>sugar</th>\n      <th>sodium</th>\n      <th>protein</th>\n      <th>saturated_fat</th>\n      <th>carbohydrates</th>\n    </tr>\n    <tr>\n      <th>balanced</th>\n      <th></th>\n      <th></th>\n      <th></th>\n      <th></th>\n      <th></th>\n      <th></th>\n      <th></th>\n      <th></th>\n      <th></th>\n      <th></th>\n      <th></th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>False</th>\n      <td>37.288474</td>\n      <td>9.720619</td>\n      <td>9.037901</td>\n      <td>4.630582</td>\n      <td>322.656586</td>\n      <td>0.237330</td>\n      <td>0.469933</td>\n      <td>0.229876</td>\n      <td>0.268985</td>\n      <td>0.295157</td>\n      <td>0.101728</td>\n    </tr>\n    <tr>\n      <th>True</th>\n      <td>39.719638</td>\n      <td>10.237726</td>\n      <td>9.284238</td>\n      <td>4.611692</td>\n      <td>200.788889</td>\n      <td>0.111835</td>\n      <td>0.117106</td>\n      <td>0.119289</td>\n      <td>0.117946</td>\n      <td>0.108475</td>\n      <td>0.088152</td>\n    </tr>\n  </tbody>\n</table>
 
 We can compare the values of all the columns. First, we can see that the avg_rating for each one is quite similar which sounds fair. Then, the calories column do shows a good difference between them. The unbalanced recipes have a mean of 322.65 while the balanced recipes have a mean of 200.78. Finally the rest of the columns, unbalanced recipes is much greater to all of balanced recipes, with the carbohydrates column being the closest one to the blanced recipes mean.
 
 Another aggregate we could do is is the mean of all columns for ratings of recipes. We are going to groupby ratings in our data DataFrame and aggregate all columns using the mean.
 
-<table border="0" class="dataframe" margin-left="auto" margin-right="auto">
+<table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -284,15 +284,16 @@ Here is the final resulting cleaned dataframe:
 # Assessment of Missingness
 
 <!-- to markdown -->
-
-description    0.052403
-rating         5.944745
-review         0.022171
-avg_rating     1.068220
+**Percent Data Missing**
+|             |         0 |
+|:------------|----------:|
+| description | 0.0524032 |
+| rating      | 5.94474   |
+| avg_rating  | 1.06822   |
 dtype: float64
 <!-- end -->
 
-This summary shows us that of the relevant columns we are still working with, there are 4 columns with missing data. 3 are from the original dataset but we added `'avg_rating'`. We will look deeper into `'rating'` and `'description'`. But we should notice that none of them have many datapoints missing.
+This summary shows us that of the relevant columns we are still working with, there are 3 columns with missing data. 2 are from the original dataset but we added `'avg_rating'`. We will look deeper into `'rating'` and `'description'`. But we should notice that none of them have relatively many datapoints missing.
 
 First we can quickly explain `'avg_rating'`
 
@@ -308,8 +309,7 @@ We do not believe that the missingness mechanism for either is not missing at ra
 
 Here is an example of an interaction without a rating, it happens to be for someone who tried the recipe and loved it. We can imagine this is also likely for someone who hasn't tried it or tried it and did not like it. 
 
-<img src="assets/NoRating.png" height=5>
-
+<!-- <img src="assets/NoRating.png" height=100> -->
 ![example of missing rating](assets/NoRating.png)
 
 #### Missingness Dependency
@@ -322,18 +322,11 @@ We believe it is plausible that if a `'description'` is missing then it is likel
 
 **Avg_rating**
 
-Perform Permutation Test to see if missingness of description column is conditional on `'avg_rating'`. We will end up repeating this process for many columns following.
-
-
-Description is unique to a recipe but duplicated for each interaction, we want to know how it relates to the recipes so we must retrieve that data again by grouping
-
-need to work with only the non-null rows of the data in avg_rating otherwise no statistic could be computed
+We perform a Permutation Test to see if missingness of description column is conditional on `'avg_rating'`. We will end up repeating this process for many columns following. Description is unique to a recipe but duplicated for each interaction, we want to know how it relates to the recipes so we must retrieve that data again by grouping the interviews for each recipe together. We need to work with only the non-null rows of the data in avg_rating otherwise no statistic could be computed.
 
 #### Choosing a Test Statistic
 
 `'avg_rating'` is a quantitative variable which gives us two main options. We should use the difference of means for missing and not missing `'description'` if the distribution of `'avg_rating'` is roughly the same shape but shifted. If the shape is different and distributions are centered in the same place we should use the Kolmogorov-Smirnov statistic. 
-
-plot distribution of Avg_rating based on missingness of description
 
 <iframe src="assets/visualization_12.html" width=700 height=500 frameBorder=0></iframe>
 
@@ -343,9 +336,10 @@ As we can see the distributions are centered at roughly the same location but th
 * Test Statistic: Kolmogorov-Smirnov
 * Alpha level: 5%
 
-z-score:  3.3333333333333335
-p-value:  0.9380583291749669
-Reject Null:  False
+_Results_
+z-score:  3.3333333333333335 <br>
+p-value:  0.9380583291749669 <br>
+Reject Null:  False <br>
 
 ##### Interpret Results
 
@@ -356,6 +350,8 @@ This is above our alpha threshold of 5% so we **fail to reject the null**. This 
 This would mean `'description'` is not MAR upon `'avg_rating'`.
 
 This also indicates that our intuition was incorrect, lets test another column, `'user_id'`.
+<br>
+<br>
 
 **User_id**
 
