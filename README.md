@@ -1,12 +1,8 @@
+<img src="assets/american-heritage-chocolate-unsplash.png" alt="examplenorating" height=576 width=384 style="display: block; margin: 0 auto">
 <!-- # Recipe-Healthyness-Trends-by-season
 For UCSD class DSC80 project 3 -->
-<img src="assets/american-heritage-chocolate-unsplash.png" alt="examplenorating" height=700 style="display: block; margin: 0 auto">
-
-
-
 
 # Introduction
-
 
 In this notebook we are going to be analyzing a dataset that contains recipes and ratings from <a href="https://www.food.com/">food.com</a>. The dataset consists of `234,429` interactions with recipes. Our goal is to answer the following question: 
 
@@ -33,122 +29,65 @@ _Ratings_
 # Cleaning and EDA
 
 <!-- Describe, in detail, the data cleaning steps you took and how they affected your analyses. The steps should be explained in reference to the data generating process. Show the head of your cleaned DataFrame -->
-Steps:
+In this section of our analysis, we did some pre-processing and applied data cleaning techniques to our data that were coherent with the data generating process. For the pre-processing, we merged the two given datasets on the `'recipe_id'` column. We filled 0's in `'rating'` with `'NaN'`, because when we tried to upload a review to food.com didn't allow us to rate a recipe with 0's. Then, we created a column called `'avg_rating'`, which stores the average ratings per recipe.
 
-    1. Merge these two datasets on the `'recipe_id'` column
-    2. Fill 0's in `'rating'` with `'NaN'`, because food.com doesn't allow to rate a recipe with 0's
-    3. Create a columns of the average rating per recipe
-
-Let's check how messy is our data, so we will start exploring column by column how everything looks.
-
-First, let's check if the column `'id'` is unique. For that we need to use the recipes DataFrame which should only contain one row per `'recipe_id'`.
-
-Since we aren't going to be using the `'name'` column neither the `'contributor_id'` column rather than for reference, there is no need to clean it thoroughly. Still, let's see how many recipe `'names'` and `'contributor_id'` are repeated.
-
-Interestingly, we found out that `'microwave chocolate mug brownie'` is the most repeated recipe `'name'` in our data, and that `'contributor_id'` = `'37449'` has done `'3060'` reviews. Lets now check the `'minutes'` column.
-
-There's a large max number of `'minutes'` and it seems strange since it's nearly impossible a recipe could take you **1 million** minutes to make. Lets visualize the `'minutes'` distribution and evaluate how to address this issue.
+For the cleaning process we explored column by column looking for abnormal values. The first column we explored was `'id'`. We checked if this column was unique for every recipe in our dataset and in fact it was. This was an important step for ensuring the correctness of our analysis. Then we went over `'name'`,`'contributor_id'` but since they weren't too relevant to our analysis we didn't pefrom any cleaning. For the `'minutes'` column, we saw a large max number of `'minutes'` and it seemed strange since it's nearly impossible a recipe could take **1 million** minutes to make, so we did some plots of its distribution to decide how to clean it.
 
 <iframe src="assets/visualization_1.html" width=700 height=500 frameBorder=0></iframe>
 
 <iframe src="assets/visualization_2.html" width=700 height=500 frameBorder=0></iframe>
 
-We can visualize that most of the data is centered in a reasonable place, but there are a few data points spread out all over until **1 million** minutes. 
-
-**What are we going to do with these values?**
-
-Since it's really ambiguous how to decide a cutoff to these values, we are going to use a common statistical practice called 1.5xIQR rule developed by statistics to remove outliers.
-
-Exactly 24291 rows were cut off from the original dataframe.
-Remaining Rows:  210138
+We can visualize that most of the data is centered in a reasonable place, but there are a few data points spread out all over until **1 million** minutes. Since it's really ambiguous how to decide a cutoff to these values, we used a common statistical practice called 1.5xIQR rule developed by statistics to remove outliers. We decided this was a valid technique because most of the values were between the interquartile range, so only the outliers were going to be cutted of.
 
 <iframe src="assets/visualization_3.html" width=700 height=500 frameBorder=0></iframe>
 
-
-Moving on, we want the column `'submitted'` and `'date'` to both be `DateTime` objects. We are going check if these are strings and if they are, make the necessary transformations.
-
-As we can see above, these columns are both stored as string `objects`, so we are going to transform them.
-
-We can check that data `types` have changed.
-
-In the table above, we can see that the `'tags'`, `'nutrition'` and `'ingredients'` columns are also stored as `objects`, let's check if they are actually `lists`. If that's not the case, we are going to use some string methods to transform these columns elements into `lists`.
-
-Now that we have converted our `string` into `lists` let's see how are the values of the `lists` from `'nutrition'` stored.
-
-We need to do some cleaning here, so first we are going to transform this `strings` into `floats`. Then, these values are supposed to be percentages, so we are going to convert them into decimals.
-
-Now, let's check that the values of these new columns make sense. For this we need to write some assumptions. First, none of these values should be negative. Let's check that!
-
-Apparently, none of them is negative. Now, let's check their ranges.
-
-As we can see, we have some values that are way out of reality for a single serving size. We need to explore more what's happening with this data. Let's check out all the recipes with extremely high calories.
-
-As we can observe, most of these recipes are either cookies, cakes, breads or turkeys, which all of them are recipes that you usually cook for more than one person. These data will cause trouble to our hypothesis testing, so we need to find a way to cut it off. First lets visualize the distribution of `'calories'`, so we can decide how we are going to perform the cutoff.
+Moving on, we wanted the column `'submitted'` and `'date'` to both be ``DateTime`` objects, so we applied some cleaning to make it  `'DateTime'` objects. Then the `'tags'`, `'nutrition'` and `'ingredients'` columns were stored as strings, so we used some string methods to transform these columns elements into `lists`. We then created separate columns for the values in the `'nutrition'` lists and transformed them from strings to floats. We explored these columns values and found that we had some values that were way out of reality for a single serving size. We explored and found out that the recipes with extremely high calories were either cookies, cakes, breads or turkeys, which all of them are recipes that you usually cook for more than one person. These data was going to cause trouble to our hypothesis testing, so we neede to find a way to cut it off. First lets visualized the distribution of `'calories'`, so we can decide how we are going to perform the cutoff.
 
 <iframe src="assets/visualization_4.html" width=700 height=500 frameBorder=0></iframe>
 
 <iframe src="assets/visualization_5.html" width=700 height=500 frameBorder=0></iframe>
 
-In the histogram above, we can observe that most of our data is concentrated in one point, and there are a bunch of other spread through until `45,000 calories`. Lets apply the same technique we used for `'minutes'`.
-
-Exactly 11676 rows were cut off from the original dataframe.
-Remaining Rows:  198462
+In the histogram above, we can observe that most of our data is concentrated in one point, and there are a bunch of other spread through until `45,000 calories`. So we applied the same technique we used for `'minutes'`. We decided this was a valid technique because most of the values were between the interquartile range, so only the outliers were going to be cutted of.
 
 <iframe src="assets/visualization_6.html" width=700 height=500 frameBorder=0></iframe>
 
-Since we have cleaned most of our data, lets check if there are any other columns with extreme values.
+At this point we had most of our data cleaned, but we kept exploring the last columns. Althoug most of these values were within a reasonable range, the `'sodium'` column `max` seemed pretty extreme, so we explored it. We got that the extreme values came from recipes of types of salts which is a reasonable explanation to their high levels of `'sodium'`, so we decided to keep them in our dataset.
 
-Most of these values are within a reasonable range, although the `'sodium'` column `max` seems pretty extreme. Lets explore the higher values of the `'sodium'` column and argue if these values are reasonable or not.
+We already went through most of the columns, but we still needed to check the `'user_id'` column. There was one row in the `'user_id'` column which contained `NaN`. Since this row didn't provide any information to our data we decided to drop it. Our last column to check was `'rating'`. We checked if its values were positive integeres in the range `[1,5]` since those are the possible ratings for a recipe, and indeed they were, so no cleaning was made.
 
-Most of this recipes are types of salts which is a reasonable explanation to their high levels of `'sodium'`. Also the turkey apparentley was brined and that requieres lots of `'sodium'` too, so it's also fine.
-
-We have already gone through most of the columns, but we still need to check the `'user_id'` and `'rating'` columns. As you can see from the table above, there is only one row in the `'user_id'` column which contains `NaN`. Let's check it out.
-
-Since this row doesn't provide any information to our data we are going to drop it.
-
-Since this row doesn't provide any information to our data we are going to drop it.
-
-As we can see, the ratings are stored as `floats`, but the reason being is because we can't store `np.NaN` as `ints`. Therefore, all ratings must be stored as `floats`. Now let's check if any of them has decimals or if they aren't in the range `[1,5]`.
-
-We have checked that our `'rating'` values are in order. With this we finish the cleaning procces of our DataFrame, here is the head of it.
-
-Now that we have our data cleaned, we can add a column that classifies our recipes as `'balanced'` or `'unbalanced'`. According to the FDA, meals should contain between `5%` to `20%` of the percentage of daily value (PDV). We are going to use this fact to classify our recipes in `'balanced'` and `'unbalanced'` categories.
+Finally we added a column that classified our recipes as `'balanced'` or `'unbalanced'`. According to the FDA, meals should contain between `5%` to `20%` of the percentage of daily value (PDV). We used this to classify our recipes in `'balanced'` and `'unbalanced'` categories.
 
 Source: https://www.fda.gov/food/new-nutrition-facts-label/lows-and-highs-percent-daily-value-new-nutrition-facts-label
 
-Let's create a DataFrame with `unique id's`. This will be handy for the future when we start doing some `EDA`.
+In summary, we explored the data generating process of this dataset from bottom to top, and used this information to decide which values were coherent with it and relevant to our analysis. We filtered out all values that weren't relevant, and classified those who were in order to perform analysis in the future.
 
 #### Univariate Analysis
 
-We want to explore what's the distribution of interactions among all recipies. We think this is an interesting analysis since we can start drawing lots of experiments from it.
+We wanted to explore the distribution of interactions among all recipies. We thought this was an interesting analysis since we could start drawing lots of experiments from it.
 
 <iframe src="assets/visualization_7.html" width=700 height=500 frameBorder=0></iframe>
 
+As we observe, there is a decrease in interactions over the years according to this visualization, but we can also appreciate a spike in many of the June's throughout the years. Why this happens is a really good question. After observing this plot, we were curious about the  distribution of recipe's submissions throughout the years, so we decided to visualize it too.
+
 <iframe src="assets/visualization_8.html" width=700 height=500 frameBorder=0></iframe>
-
-We have checked that our `'rating'` values are in order. With this we finish the cleaning procces of our DataFrame, here is the head of it.
-
-Now let's observe the distribution of recipe's submissions throughout the years.
-
-
 
 This is a really insightfull visualization since we can observe how the amount of submissions decreased over the years from thousands of recipes submitted per month to less than 50 per month. 
 
 #### Bivariate Analysis
 
-Sometimes the best food we eat is the one with the most calories. Although that's quite a shame, let's see if that's true in our data. For this we are going to compare the relationship between `'rating'` and `'calories'`. We are going to plot a horizontal bar chart to show the `mean of calories per star rating`.
+Sometimes the best food we eat is the one with the most calories. Although that's quite a shame, we wanted to see if that's true in our data. We wanted to analyze the relationship between `'rating'` and `'calories'`. For this we plotted a horizontal bar chart to show the `mean of calories per star rating`.
 
 <iframe src="assets/visualization_9.html" width=700 height=500 frameBorder=0></iframe>
 
-This is quite surprising since it goes against our intuition. We thought food with more calories would have more ratings but apparently is completely opposite from what we thought. Even though almost all means are the same, we can see an inverse proportionate trend with respect to ratings. It will be interesting then to see how our question develops in the next steps.
+This is quite surprising since it goes against our intuition. We thought food with more calories would have more ratings but apparently is completely opposite from what we thought. Even though almost all means are the same, we can see an inverse proportionate trend with respect to ratings.
 
-Now lets observe the relationship between mean of calories consumed per month of the year.
+We then observed the relationship between mean of calories consumed per month of the year.
 
 <iframe src="assets/visualization_10.html" width=700 height=500 frameBorder=0></iframe>
 
-There appears to be a trens in the data. The months February, March, September and October have quite a peak compared to the rest of the months. It could be quite interesting to anlyze more in depth what are the reasons of this.
+There appears to be a trends in the data. The months February, March, September and October have quite a peak compared to the rest of the months. It could be quite interesting to anlyze more in depth what are the reasons of this.
 
-Another bivariate analysis we can work on is the distribution of calories between `'balanced'` and `'unbalanced'` recipes. Lets plot a histogram with a marginal box plot to see the difference in distributions.
+Another bivariate analysis we worked on is the distribution of calories between `'balanced'` and `'unbalanced'` recipes. We plotted a histogram with a marginal box plot to see the difference in distributions.
 
 <iframe src="assets/visualization_11.html" width=700 height=500 frameBorder=0></iframe>
 
@@ -156,13 +95,15 @@ We can observe that there is a signifficant difference in the distributions of c
 
 #### Interesting Aggregates
 
-One interesting aggregate is the mean of all columns for balanced and unbalanced recipes. For this we need to groupby recipe, but we already did that, so we are going to use our 'unique_id_df' to groupby the 'balanced' column.
+One interesting aggregate we thought of was the mean of all columns for balanced and unbalanced recipes. For this we needed to groupby recipe, but we already did that, so we are going to use our `'unique_id_df'` to groupby the `'balanced'` column.
 
-<table border="0" class="dataframe" style="width:90%">  <thead>    <tr style="text-align: right;">      <th></th>      <th>minutes</th>      <th>n_steps</th>      <th>n_ingredients</th>      <th>avg_rating</th>      <th>calories</th>      <th>total_fat</th>      <th>sugar</th>      <th>sodium</th>      <th>protein</th>      <th>saturated_fat</th>      <th>carbohydrates</th>    </tr>    <tr>      <th>balanced</th>      <th></th>      <th></th>      <th></th>      <th></th>      <th></th>      <th></th>      <th></th>      <th></th>      <th></th>      <th></th>      <th></th>    </tr>  </thead>  <tbody>    <tr>      <th>False</th>      <td>37.288474</td>      <td>9.720619</td>      <td>9.037901</td>      <td>4.630582</td>      <td>322.656586</td>      <td>0.237330</td>      <td>0.469933</td>      <td>0.229876</td>      <td>0.268985</td>      <td>0.295157</td>      <td>0.101728</td>    </tr>    <tr>      <th>True</th>      <td>39.719638</td>      <td>10.237726</td>      <td>9.284238</td>      <td>4.611692</td>      <td>200.788889</td>      <td>0.111835</td>      <td>0.117106</td>      <td>0.119289</td>      <td>0.117946</td>      <td>0.108475</td>      <td>0.088152</td>    </tr>  </tbody></table>
 
-We can compare the values of all the columns. First, we can see that the avg_rating for each one is quite similar which sounds fair. Then, the calories column do shows a good difference between them. The unbalanced recipes have a mean of 322.65 while the balanced recipes have a mean of 200.78. Finally the rest of the columns, unbalanced recipes is much greater to all of balanced recipes, with the carbohydrates column being the closest one to the blanced recipes mean.
+<table border="0" class="dataframe" style="width:90%"><thead><tr style="text-align: right;"><th></th><th>minutes</th><th>n_steps</th><th>n_ingredients</th><th>avg_rating</th><th>calories</th><th>total_fat</th><th>sugar</th><th>sodium</th><th>protein</th><th>saturated_fat</th><th>carbohydrates</th></tr>    <tr><th>balanced</th><th></th><th></th><th></th>      <th></th><th></th><th></th><th></th><th></th><th></th><th></th>      <th></th>    </tr>  </thead>  <tbody>    <tr><th>False</th><td>37.288474</td><td>9.720619</td>      <td>9.037901</td><td>4.630582</td><td>322.656586</td><td>0.237330</td><td>0.469933</td>      <td>0.229876</td><td>0.268985</td><td>0.295157</td><td>0.101728</td></tr>    <tr>      <th>True</th><td>39.719638</td><td>10.237726</td><td>9.284238</td><td>4.611692</td>      <td>200.788889</td><td>0.111835</td><td>0.117106</td><td>0.119289</td><td>0.117946</td>      <td>0.108475</td><td>0.088152</td></tr>  </tbody></table>
 
-Another aggregate we could do is is the mean of all columns for ratings of recipes. We are going to groupby ratings in our data DataFrame and aggregate all columns using the mean.
+
+We can compare the values of all the columns. First, we can see that the `'avg_rating'` for each one is quite similar which sounds fair. Then, the `'calories'` column do shows a signifficant difference between them. The `'unbalanced'` recipes have a mean of `322.65` while the balanced recipes have a mean of `200.78`. Finally the rest of the columns, unbalanced recipes is much greater to all of balanced recipes, with the `'carbohydrates'` column being the closest one to the blanced recipes mean.
+
+Another aggregate we did was the mean of all columns for ratings of recipes. We groupby ratings in our data DataFrame and aggregate all columns using the mean.
 
 <table border="0" class="dataframe" style="width:90%">
   <thead>
@@ -316,7 +257,7 @@ Here is an example of an interaction without a rating, it happens to be for some
 
 
 
-<img src="assets/NoRating.png" alt="examplenorating" height=500 style="display: block; margin: 0 auto">
+<img src="assets/NoRating.png" alt="examplenorating" height=430 style="display: block; margin: 0 auto">
 <!-- ![example of missing rating](assets/NoRating.png) -->
 <br>
 <br>
