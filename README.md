@@ -154,7 +154,7 @@ We can observe that there is a signifficant difference in the distributions of c
 
 One interesting aggregate is the mean of all columns for balanced and unbalanced recipes. For this we need to groupby recipe, but we already did that, so we are going to use our 'unique_id_df' to groupby the 'balanced' column.
 
-<table border="0" class="dataframe">\n  <thead>\n    <tr style="text-align: right;">\n      <th></th>\n      <th>minutes</th>\n      <th>n_steps</th>\n      <th>n_ingredients</th>\n      <th>avg_rating</th>\n      <th>calories</th>\n      <th>total_fat</th>\n      <th>sugar</th>\n      <th>sodium</th>\n      <th>protein</th>\n      <th>saturated_fat</th>\n      <th>carbohydrates</th>\n    </tr>\n    <tr>\n      <th>balanced</th>\n      <th></th>\n      <th></th>\n      <th></th>\n      <th></th>\n      <th></th>\n      <th></th>\n      <th></th>\n      <th></th>\n      <th></th>\n      <th></th>\n      <th></th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>False</th>\n      <td>37.288474</td>\n      <td>9.720619</td>\n      <td>9.037901</td>\n      <td>4.630582</td>\n      <td>322.656586</td>\n      <td>0.237330</td>\n      <td>0.469933</td>\n      <td>0.229876</td>\n      <td>0.268985</td>\n      <td>0.295157</td>\n      <td>0.101728</td>\n    </tr>\n    <tr>\n      <th>True</th>\n      <td>39.719638</td>\n      <td>10.237726</td>\n      <td>9.284238</td>\n      <td>4.611692</td>\n      <td>200.788889</td>\n      <td>0.111835</td>\n      <td>0.117106</td>\n      <td>0.119289</td>\n      <td>0.117946</td>\n      <td>0.108475</td>\n      <td>0.088152</td>\n    </tr>\n  </tbody>\n</table>
+<table border="0" class="dataframe">  <thead>    <tr style="text-align: right;">      <th></th>      <th>minutes</th>      <th>n_steps</th>      <th>n_ingredients</th>      <th>avg_rating</th>      <th>calories</th>      <th>total_fat</th>      <th>sugar</th>      <th>sodium</th>      <th>protein</th>      <th>saturated_fat</th>      <th>carbohydrates</th>    </tr>    <tr>      <th>balanced</th>      <th></th>      <th></th>      <th></th>      <th></th>      <th></th>      <th></th>      <th></th>      <th></th>      <th></th>      <th></th>      <th></th>    </tr>  </thead>  <tbody>    <tr>      <th>False</th>      <td>37.288474</td>      <td>9.720619</td>      <td>9.037901</td>      <td>4.630582</td>      <td>322.656586</td>      <td>0.237330</td>      <td>0.469933</td>      <td>0.229876</td>      <td>0.268985</td>      <td>0.295157</td>      <td>0.101728</td>    </tr>    <tr>      <th>True</th>      <td>39.719638</td>      <td>10.237726</td>      <td>9.284238</td>      <td>4.611692</td>      <td>200.788889</td>      <td>0.111835</td>      <td>0.117106</td>      <td>0.119289</td>      <td>0.117946</td>      <td>0.108475</td>      <td>0.088152</td>    </tr>  </tbody></table>
 
 We can compare the values of all the columns. First, we can see that the avg_rating for each one is quite similar which sounds fair. Then, the calories column do shows a good difference between them. The unbalanced recipes have a mean of 322.65 while the balanced recipes have a mean of 200.78. Finally the rest of the columns, unbalanced recipes is much greater to all of balanced recipes, with the carbohydrates column being the closest one to the blanced recipes mean.
 
@@ -286,8 +286,8 @@ Here is the final resulting cleaned dataframe:
 <!-- to markdown -->
 **Percent Data Missing**
 |             |         0 |
-|:------------|----------:|
 
+|:------------|----------:|
 | description | 0.0524032 |
 | rating      | 5.94474   |
 | avg_rating  | 1.06822   |
@@ -311,7 +311,7 @@ We do not believe that the missingness mechanism for either is not missing at ra
 Here is an example of an interaction without a rating, it happens to be for someone who tried the recipe and loved it. We can imagine this is also likely for someone who hasn't tried it or tried it and did not like it. 
 
 <!-- <img src="assets/NoRating.png" height=100> -->
-![example of missing rating](assets/NoRating.png)
+![example of missing rating](assets/NoRating.png){style="display: block; margin: 0 auto" }
 
 #### Missingness Dependency
 
