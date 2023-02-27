@@ -16,7 +16,7 @@ For this we are going to be analyzing the columns `'id'`, `'date'` and `'nutriti
 Other columns we might work with during the cleaning process are `'minutes'`,`'submitted'`,`'n_steps'`,`'n_ingredients'`. We will probably use these since they contain relevant information about the recipe that if it's extreme, it could raise some red flags about our data.
 <br>
 
-### Datasets:
+### Datasets[^1]:
 
 _Recipes_
 <!-- start table -->
@@ -25,6 +25,8 @@ _Recipes_
 
 _Ratings_
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Column</th><th style="text-align: left">Description</th></tr></thead><tbody><tr><td style="text-align: left"><code class="language-plaintext highlighter-rouge">'user_id'</code></td><td style="text-align: left">User ID</td></tr><tr><td style="text-align: left"><code class="language-plaintext highlighter-rouge">'recipe_id'</code></td><td style="text-align: left">Recipe ID</td></tr><tr><td style="text-align: left"><code class="language-plaintext highlighter-rouge">'date'</code></td><td style="text-align: left">Date of interaction</td></tr><tr><td style="text-align: left"><code class="language-plaintext highlighter-rouge">'rating'</code></td><td style="text-align: left">Rating given</td></tr><tr><td style="text-align: left"><code class="language-plaintext highlighter-rouge">'review'</code></td><td style="text-align: left">Review text</td></tr></tbody></table></div>
+
+[^1]: Data is a subset from 2008 on from the raw data in [this report](https://cseweb.ucsd.edu/~jmcauley/pdfs/emnlp19c.pdf). Column descriptions provided from UCSD DSC80!
 
 <br>
 <br>
@@ -69,12 +71,12 @@ In summary, we explored the data generating process of this dataset from bottom 
 
 ### Dataset
 
-Here are the first few rows of the cleaned dataframe[^1]:
+Here are the first few rows of the cleaned dataframe[^2]:
 
 
-<iframe src="assets/sdatahead.html" width=900 height=100% frameBorder=0 title="cleaned dataset preview"></iframe>
+<iframe src="assets/sdatahead.html" width=900 height=100 frameBorder=0 title="cleaned dataset preview"></iframe>
 
-[^1]: We only show a preview of some columns for the sake of space and formatting when they are not essential to our understanding of the dataset or the analysis. 
+[^2]: We only show a preview of some columns for the sake of space and formatting when they are not essential to our understanding of the dataset or the analysis. 
 <!-- <iframe src="assets/df2.html" width=1000 height=600 frameBorder=0></iframe> -->
 
 <br>
@@ -388,7 +390,7 @@ Once again, the graph gives an idea of how usual or abnormal our observed differ
 
 _Results_ <br>
 z-score:  387.5 <br>
-p-value:  8.9e-08[^2]
+p-value:  8.9e-08[^3]
 <br>
 Reject Null:  True <br>
 <br>
@@ -399,7 +401,7 @@ We can interpret the results of the Kolmogorov-Smirnov permutation test as follo
 
 This is below our alpha threshold of 5% so we **reject the null**. This means that the missingness of `'ratings'` is likely related and or condional to the distribution of `'calories'`. This means `'ratings'` is MAR upon `'calories'`.
 
-[^2]: This is scientific notation for 9 × 10^-8 which is very close to 0
+[^3]: This is scientific notation for 9 × 10^-8 which is very close to 0
 
 <br>
 <br>
