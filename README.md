@@ -1,6 +1,7 @@
 <img src="assets/american-heritage-chocolate-unsplash.png" alt="examplenorating" height=576 style="display: block; margin: 0 auto">
 <!-- # Recipe-Healthyness-Trends-by-season
 For UCSD class DSC80 project 3 -->
+<base target="_blank"> <!-- links open in new tab -->
 <br>
 
 # Introduction
@@ -26,7 +27,8 @@ _Recipes_
 _Ratings_
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Column</th><th style="text-align: left">Description</th></tr></thead><tbody><tr><td style="text-align: left"><code class="language-plaintext highlighter-rouge">'user_id'</code></td><td style="text-align: left">User ID</td></tr><tr><td style="text-align: left"><code class="language-plaintext highlighter-rouge">'recipe_id'</code></td><td style="text-align: left">Recipe ID</td></tr><tr><td style="text-align: left"><code class="language-plaintext highlighter-rouge">'date'</code></td><td style="text-align: left">Date of interaction</td></tr><tr><td style="text-align: left"><code class="language-plaintext highlighter-rouge">'rating'</code></td><td style="text-align: left">Rating given</td></tr><tr><td style="text-align: left"><code class="language-plaintext highlighter-rouge">'review'</code></td><td style="text-align: left">Review text</td></tr></tbody></table></div>
 
-[^1]: Data is a subset from 2008 on from the raw data in [this report](https://cseweb.ucsd.edu/~jmcauley/pdfs/emnlp19c.pdf). Column descriptions provided from UCSD DSC80!
+[^1]: Data is a subset from 2008 on from the raw data in [this report](https://cseweb.ucsd.edu/~jmcauley/pdfs/emnlp19c.pdf). Column descriptions provided from UCSD DSC80! 
+<!-- <a href="https://cseweb.ucsd.edu/~jmcauley/pdfs/emnlp19c.pdf" target="_blank">this report</a> -->
 
 <br>
 <br>
@@ -74,7 +76,7 @@ In summary, we explored the data generating process of this dataset from bottom 
 Here are the first few rows of the cleaned dataframe[^2]:
 
 
-<iframe src="assets/sdatahead.html" width=900 height=100 frameBorder=0 title="cleaned dataset preview"></iframe>
+<iframe src="assets/sdatahead.html" width=900 height=300 frameBorder=0 title="cleaned dataset preview"></iframe>
 
 [^2]: We only show a preview of some columns for the sake of space and formatting when they are not essential to our understanding of the dataset or the analysis. 
 <!-- <iframe src="assets/df2.html" width=1000 height=600 frameBorder=0></iframe> -->
