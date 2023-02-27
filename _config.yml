@@ -3,6 +3,6 @@ plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
 
 title: Too Many Holiday Sweats & Treats?
-description: By Trey Scheid and Eduardo Speigel #[A short description of your site's purpose]
+description: By Trey Scheid and Eduardo Spiegel #[A short description of your site's purpose]
 
 show_downloads: false #["true" or "false" (unquoted) to indicate whether to provide a download URL]
