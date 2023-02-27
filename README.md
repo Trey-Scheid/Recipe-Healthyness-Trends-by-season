@@ -69,10 +69,10 @@ In summary, we explored the data generating process of this dataset from bottom 
 
 ### Dataset
 
-Here is the final resulting cleaned dataframe[^1]:
+Here are the first few rows of the cleaned dataframe[^1]:
 
 
-<iframe src="assets/sdatahead.html" width=900 frameBorder=0></iframe>
+<iframe src="assets/sdatahead.html" width=900 height=100% frameBorder=0 title="cleaned dataset preview"></iframe>
 
 [^1]: We only show a preview of some columns for the sake of space and formatting when they are not essential to our understanding of the dataset or the analysis. 
 <!-- <iframe src="assets/df2.html" width=1000 height=600 frameBorder=0></iframe> -->
