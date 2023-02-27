@@ -473,6 +473,7 @@ Lets check how the proportion of unbalanced recipes varies by year in case we sh
 <iframe src="assets/visualization_20.html" width=700 height=500 frameBorder=0></iframe>
 
 We notive that there is a dip followed by a spike in the last three years, this data could be more variable since as we saw in the EDA there are much fewer recipes interacted with in the last few years. For this reason we will continue with the hypothesis test on all of the data together regardless of year. 
+
 <br>
 
 _Now we perform the hypothesis test:_
@@ -486,6 +487,7 @@ Our observed test statistic is found by calculating the proportion of interactio
 <iframe src="assets/visualization_21.html" width=700 height=500 frameBorder=0></iframe>
 
 The empirical distribution of proportions of interactions on unbalanced recipes shows all the probable proportions expected assuming the winter holiday season has no effect. We calculate a p-value of 0.6197 given our observed proportion.
+<br>
 
 ##### Results
 
