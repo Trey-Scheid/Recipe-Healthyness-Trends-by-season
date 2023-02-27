@@ -238,7 +238,7 @@ table {
 th {
   font-family: 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   padding: 10px;
-  background: #383430;
+  background: #363431;
   color: #fff;
  }
 
@@ -288,8 +288,8 @@ Full-Width Styles
   right: 10px;
   z-index: 10;
   padding: 10px 40px 10px 10px;
-  color: #ff7d1a;
-  background: url('../images/blacktocat.png') #181818 95% 50% no-repeat 80%;
+  color: #ffffff;
+  background: url('../assets/githubcat.png') #181818 no-repeat 95% 50%;
   font-weight: 600;
   box-shadow: 0 0 10px rgba(0,0,0,.5);
   border-bottom-left-radius: 2px;
@@ -318,7 +318,7 @@ Full-Width Styles
 }
 
 #project_tagline {
-  color: #fff;
+  color: #ff7d1a;
   font-size: 22px;
   font-weight: 275;
   background: none;
@@ -375,7 +375,7 @@ Full-Width Styles
 }
 
 #footer_wrap {
-  background: #1b1815; //#211e1a
+  background: #211e1a; //#211e1a
 }
 
 
