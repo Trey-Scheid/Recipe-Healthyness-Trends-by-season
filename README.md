@@ -528,8 +528,10 @@ Eduardo and Trey
 P.S.
 Check out our other work at our github profiles linked below or send us a message at [trey11sport@gmail.com](mailto:trey11sport@gmail.com) & [eduardo.spiegel21@gmail.com](mailto:eduardo.spiegel21@gmail.com)
 
+<br>
+<br>
 
-**Other Possible Questions:**
+**Other Questions YOU Could Explore:**
 - What are the healthy/unhealthy food recipe trends over the year?
 - More specifically: Have low fat low sugar recipes become more or less common over time? What about seasonally?
 - Which ingredient is the most unique with the highest rating?
